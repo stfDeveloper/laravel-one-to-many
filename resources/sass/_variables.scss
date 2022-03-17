@@ -38,7 +38,6 @@ button{
     border: 1px solid red;
     width: 500px;
     height: 550px;
-    overflow: auto;
     margin: 20px;
     
     .postTitle{
@@ -47,6 +46,7 @@ button{
         padding: 10px;
     }
     .postContent{
+        overflow-wrap:break-word;
         padding: 20px;
     }
 }

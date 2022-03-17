@@ -15,7 +15,7 @@
                 {{$post->title}}
             </div>
             <div class="postContent">
-                {{$post->content}}
+                    {{$post->content}}
             </div>
         </div>    
         <a href="{{route("admin.posts.edit", $post->id)}}"><button class="trigger">Modifica</button></a>
