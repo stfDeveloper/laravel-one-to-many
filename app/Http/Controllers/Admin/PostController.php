@@ -4,9 +4,14 @@ namespace App\Http\Controllers\Admin;
 use App\post;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
+    protected $validate = [
+        'title'=>'required|string|max:300',
+        'content'=>'required|max:2000'
+    ];
     /**
      * Display a listing of the resource.
      *
@@ -25,7 +30,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        return view('admin.posts.create');
     }
 
     /**
@@ -36,7 +41,22 @@ class PostController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate($this->validate);
+        $data = $request->all();
+        //slug restituisce una URL più leggibile sostituendo gli spazi con dei '-'
+        $slug = Str::slug($data['title']);
+        //controllo di slug
+        $single = 1;
+        while (post::where('slug', $slug)->first()){
+             $slug = Str::slug($data['title']).'-'.$single;
+             $single ++;
+        }
+        $data['slug']=$slug;
+        $newPost = new post();
+        $newPost->fill($data);
+        $newPost ->save();
+        return redirect()->route('admin.posts.show', $newPost->id);
+
     }
 
     /**
@@ -45,9 +65,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(post $post)
     {
-        //
+        return view('admin.posts.show', compact('post'));
     }
 
     /**
@@ -56,9 +76,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(post $post)
     {
-        //
+        return view('admin.posts.edit', compact('post'));
     }
 
     /**
@@ -68,9 +88,25 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, post $post)
     {
-        //
+        $request->validate($this->validate);
+        $data = $request->all();
+        if ($post->tilte == $data['title']){
+            $slug= $post->slug;
+        }else{
+            //slug restituisce una URL più leggibile sostituendo gli spazi con dei '-'
+        $slug = Str::slug($data['title']);
+        //controllo di slug
+        $single = 1;
+        while (post::where('slug', $slug)->where('id', '!=' , '$post->id')->first()){
+             $slug = Str::slug($data['title']).'-'.$single;
+             $single ++;
+        }
+        }
+        $data['slug']=$slug;
+        $post->update($data);
+        return redirect()->route('admin.posts.index');
     }
 
     /**

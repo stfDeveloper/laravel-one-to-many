@@ -16,6 +16,17 @@
                         Welcome {{Auth::user()->name}},
                     {{ __('You are logged in!') }}
                 </div>
+
+                <div class="card">
+                    <div class="card-header">
+                        POSTS
+                    </div>
+                        <div class="card-body">
+                            <a href="{{route("admin.posts.store")}}">
+                                <button>BoolPress</button>
+                            </a>
+                        </div>
+                </div>
             </div>
         </div>
     </div>

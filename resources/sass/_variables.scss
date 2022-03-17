@@ -17,3 +17,84 @@ $yellow: #ffed4a;
 $green: #38c172;
 $teal: #4dc0b5;
 $cyan: #6cb2eb;
+
+.clickPosts{
+    text-align: center;
+}
+button{
+    border: 0;
+    padding: 5px 40px 5px 40px;
+    width: 200px;
+    background-color:#f6993f;
+}
+.PostContainer{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    padding: 50px 30px;
+}
+.postCard{
+    border: 1px solid red;
+    width: 500px;
+    height: 550px;
+    overflow: auto;
+    margin: 20px;
+    
+    .postTitle{
+        background-color: darkgray;
+        font-size: 20px;
+        padding: 10px;
+    }
+    .postContent{
+        padding: 20px;
+    }
+}
+.trigger{
+    position: relative;
+    bottom: 300px;
+    left: 360px;
+    margin: 5px;
+
+}
+.header{
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    background-color: rgb(228, 228, 228);
+}
+.logo{
+    color: black;
+    font-size: 2rem;
+    text-decoration: none !important;
+}
+a{  
+    color: black !important;
+    text-decoration: none !important;
+}
+.containerCrea{
+    padding-top:50px;
+    padding-bottom:20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#inputTitle{
+    width: 200px;
+    height: 30px;
+    padding: 5px;
+    border: 1px solid white;
+    background-color: rgb(253, 230, 230);
+    text-align: center;
+    margin: auto;
+}
+#inputContent{
+    position: relative;
+    bottom: 15px;
+    width: 500px;
+    height: 100px;
+    padding: 5px;
+    border: 1px solid white;
+    background-color: rgb(253, 230, 230);
+}
