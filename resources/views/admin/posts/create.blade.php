@@ -16,8 +16,19 @@
             <input type="text" class="form-control" name="title" id="inputTitle" placeholder="inserisci il titolo">
         </div> 
         <div class="form-group">
+            <select name="category_id" id="">
+                <option value="">----</option>
+                @foreach ($categories as $element)
+
+                <option value="{{$element->id}}">{{$element->type}}</option>
+                
+                @endforeach
+            </select>
+        </div> 
+        <div class="form-group">
             <textarea  class="form-control" name="content" id="inputContent"></textarea>
         </div>
+
         <button type="submit">Aggiungi</button>
         </form>
     </div>

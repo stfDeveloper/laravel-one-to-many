@@ -12,8 +12,14 @@
     @foreach ($posts as $post)
     <div class="postCard">
             <div class="postTitle">
-                {{$post->title}}
+                <div> 
+                    {{$post->title}}
+                </div>
             </div>
+            <div>
+                category:{{$post->category? $post->category->type:'-'}}
+            </div>
+            
             <div class="postContent">
                     {{$post->content}}
             </div>
