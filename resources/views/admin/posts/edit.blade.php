@@ -10,6 +10,14 @@
     <div class="form-group">
         <textarea name="content" id="inputContent">{{$post->content}}</textarea>
     </div>
+    <div class="form-group">
+        <select name="category_id" id="">
+            <option value="">----</option>
+            @foreach ($categories as $element)
+            <option value="{{$element->id}}">{{$element->type}}</option>
+            @endforeach
+        </select>
+    </div> 
     <button type="submit">Salva</button>
     <a href="{{route("admin.posts.index")}}"><button type="button">back</button></a>
     </div>

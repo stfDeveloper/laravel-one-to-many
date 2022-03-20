@@ -5,13 +5,15 @@ use App\post;
 use App\Category;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class PostController extends Controller
 {
     protected $validate = [
         'title'=>'required|string|max:300',
-        'content'=>'required|max:2000'
+        'content'=>'required|max:2000',
+        'image'=>'nullable|image|mimes:jpg,png,jpeg'
     ];
     /**
      * Display a listing of the resource.
@@ -45,6 +47,10 @@ class PostController extends Controller
     {
         $request->validate($this->validate);
         $data = $request->all();
+        if (isset($data['image'])) {
+            $img_path = Storage::put('uploads',$data ['image']);
+            $data['image'] = $img_path;
+        };
         //slug restituisce una URL più leggibile sostituendo gli spazi con dei '-'
         $slug = Str::slug($data['title']);
         //controllo di slug
@@ -117,8 +123,9 @@ class PostController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(post $post)
     {
-        //
+        $post->delete();
+        return redirect()->route('admin.posts.index');
     }
 }

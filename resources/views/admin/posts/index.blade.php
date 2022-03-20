@@ -23,9 +23,23 @@
             <div class="postContent">
                     {{$post->content}}
             </div>
+            <div>
+                @if ($post->image != null)
+                <img class="image" src="{{ asset('images/'. $post->image) }}" alt="">
+                @else 
+                <img class="image" src="{{ asset('images/noimage.png')}}" alt="">
+                @endif
+            </div>
         </div>    
-        <a href="{{route("admin.posts.edit", $post->id)}}"><button class="trigger">Modifica</button></a>
-        <a href="{{route("admin.posts.show", $post->id)}}"><button class="trigger">Vedi</button></a>
+        <div class="buttons">
+            <a href="{{route("admin.posts.edit", $post->id)}}"><button>Modifica</button></a>
+            <a href="{{route("admin.posts.show", $post->id)}}"><button>Vedi</button></a>
+            <form action="{{route("admin.posts.destroy", $post->id)}}"onsubmit="return confirm ('cancellare?') "method="POST" >
+                @csrf
+                @method("DELETE")
+                <button type="submit">delete</button>
+            </form>
+        </div>
     @endforeach
 </div>
 

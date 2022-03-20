@@ -10,7 +10,7 @@
 
 </div>
 <div class="containerCrea">
-    <form action="{{route("admin.posts.store")}}" method="POST">
+    <form action="{{route("admin.posts.store")}}" method="POST" enctype="multipart/form-data">
         @csrf
         <div class="form-group">
             <input type="text" class="form-control" name="title" id="inputTitle" placeholder="inserisci il titolo">
@@ -19,11 +19,13 @@
             <select name="category_id" id="">
                 <option value="">----</option>
                 @foreach ($categories as $element)
-
                 <option value="{{$element->id}}">{{$element->type}}</option>
-                
                 @endforeach
             </select>
+            <div class="form-group">
+                <label for="image"></label>
+                <input type="file" name="image">
+            </div>
         </div> 
         <div class="form-group">
             <textarea  class="form-control" name="content" id="inputContent"></textarea>
